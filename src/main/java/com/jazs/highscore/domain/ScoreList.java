@@ -9,7 +9,7 @@ public class ScoreList {
 	
 	private List<Score> scores;
 
-	public List<Score> getLabels() {
+	public List<Score> getScores() {
 		return scores;
 	}
 

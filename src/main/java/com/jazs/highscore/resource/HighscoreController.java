@@ -1,4 +1,4 @@
-package com.jazs.highscore;
+package com.jazs.highscore.resource;
 
 import java.io.File;
 import java.util.Iterator;
@@ -17,23 +17,20 @@ import com.fasterxml.jackson.dataformat.csv.CsvParser;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import com.jazs.highscore.dao.DataStoreDao;
 import com.jazs.highscore.domain.Score;
+import com.jazs.highscore.domain.ScoreList;
 
 @RestController
-public class SampleController {
+public class HighscoreController {
 
 	@Autowired
-	DataStoreDao dao;
+	ScoreList scores;
 	
     @RequestMapping("/")
     String home() throws Exception {
-    	List<Score> list = dao.readOraculumDataStore();
-    	list.addAll(dao.readSingleSourceOfTruthDataStore());
-    	list.addAll(dao.readThirdPartyDataStore());
-    	
-    	for (Score rawData : list) {
+    	for (Score rawData : scores.getScores()) {
 			System.out.println(rawData);
 		}
-        return "Hello World!";
+        return "under construction!";
     }
 
 }

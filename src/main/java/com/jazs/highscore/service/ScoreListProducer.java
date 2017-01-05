@@ -1,9 +1,12 @@
 package com.jazs.highscore.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,6 +24,7 @@ public class ScoreListProducer {
 	@Autowired
 	DataStoreDao dao;
 	
+	@PostConstruct
 	private void setupScoreList() {
     	List<Score> unsortedScores = dao.readOraculumDataStore();
     	unsortedScores.addAll(dao.readSingleSourceOfTruthDataStore());
@@ -28,7 +32,7 @@ public class ScoreListProducer {
     	
     	List<Score> sortedScores = unsortedScores.stream().sorted(scoreComparator()).collect(Collectors.toCollection(ArrayList::new));
     	
-    	scoreList.setLabels(sortedScores);
+    	scoreList.setLabels(Collections.unmodifiableList(sortedScores));
 	}
 
 	private Comparator<Score> scoreComparator() {
