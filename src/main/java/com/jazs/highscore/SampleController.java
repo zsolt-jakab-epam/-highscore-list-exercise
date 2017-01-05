@@ -16,7 +16,7 @@ import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvParser;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import com.jazs.highscore.dao.DataStoreDao;
-import com.jazs.highscore.domain.RawData;
+import com.jazs.highscore.domain.Score;
 
 @RestController
 public class SampleController {
@@ -26,11 +26,11 @@ public class SampleController {
 	
     @RequestMapping("/")
     String home() throws Exception {
-    	List<RawData> list = dao.readOraculumDataStore();
+    	List<Score> list = dao.readOraculumDataStore();
     	list.addAll(dao.readSingleSourceOfTruthDataStore());
     	list.addAll(dao.readThirdPartyDataStore());
     	
-    	for (RawData rawData : list) {
+    	for (Score rawData : list) {
 			System.out.println(rawData);
 		}
         return "Hello World!";
