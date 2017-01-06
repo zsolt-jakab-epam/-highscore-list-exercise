@@ -32,7 +32,7 @@ public class ScoreListProducer {
     	
     	List<Score> sortedScores = unsortedScores.stream().sorted(scoreComparator()).collect(Collectors.toCollection(ArrayList::new));
     	
-    	scoreList.setLabels(Collections.unmodifiableList(sortedScores));
+    	scoreList.setScores(Collections.unmodifiableList(sortedScores));
 	}
 
 	private Comparator<Score> scoreComparator() {

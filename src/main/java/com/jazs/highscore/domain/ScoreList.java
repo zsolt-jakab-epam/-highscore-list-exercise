@@ -13,7 +13,7 @@ public class ScoreList {
 		return scores;
 	}
 
-	public void setLabels(List<Score> scores) {
+	public void setScores(List<Score> scores) {
 		this.scores = scores;
 	} 
 }
