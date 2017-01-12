@@ -1,15 +1,15 @@
 package com.jazs.highscore.domain;
 
-public class Score {
+public class RawData {
 	
 	private Integer id;
 	private String label;
 	private Float value;
 	
-	public Score() {
+	public RawData() {
 	}
 	
-	public Score(Integer id, String label, Float value) {
+	public RawData(Integer id, String label, Float value) {
 		this.id = id;
 		this.label = label;
 		this.value = value;

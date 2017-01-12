@@ -7,7 +7,7 @@
 
 <body>
 	<table>
-		<c:forEach items="${scores}" var="line">
+		<c:forEach items="${coloredLabels}" var="line">
 			<tr>
 				<td><c:out value="${line.label}" /></td>
 			</tr>

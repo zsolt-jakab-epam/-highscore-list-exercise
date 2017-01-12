@@ -5,24 +5,23 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.jazs.highscore.domain.Score;
-import com.jazs.highscore.domain.ScoreList;
+import com.jazs.highscore.domain.ColoredLabel;
 
 @Controller
 public class HighscoreController {
 
 	@Autowired
-	ScoreList scores;
+	List<ColoredLabel> coloredLabels;
 	
     @RequestMapping("/")
-    public String list(Map<String, List<Score>> model) {
-    	for (Score rawData : scores.getScores()) {
+    public String list(Map<String, List<ColoredLabel>> model) {
+    	for (ColoredLabel rawData : coloredLabels) {
 			System.out.println(rawData);
 		}
-    	System.out.println(scores);
-		model.put("scores", scores.getScores());
+    	System.out.println(coloredLabels);
+		model.put("coloredLabels", coloredLabels);
 		
 		return "scores";
     }

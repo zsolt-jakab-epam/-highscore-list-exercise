@@ -7,13 +7,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class ScoreList {
 	
-	private List<Score> scores;
+	private List<RawData> scores;
 
-	public List<Score> getScores() {
+	public List<RawData> getScores() {
 		return scores;
 	}
 
-	public void setScores(List<Score> scores) {
+	public void setScores(List<RawData> scores) {
 		this.scores = scores;
 	} 
 }

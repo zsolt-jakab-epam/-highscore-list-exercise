@@ -11,39 +11,40 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Repository;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvParser;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
-import com.jazs.highscore.domain.Score;
+import com.jazs.highscore.domain.ColoredData;
+import com.jazs.highscore.domain.RawData;
 
 @Repository
 public class DataStoreDao {
 
-	CsvMapper mapper = new CsvMapper();
+	private CsvMapper mapper = new CsvMapper();
 
 	private CsvSchema bootstrapSchema = CsvSchema.builder().addColumn("id", CsvSchema.ColumnType.NUMBER)
 			.addColumn("label").addColumn("value", CsvSchema.ColumnType.NUMBER).build();
+	
+	@Autowired
+	private ColoredDataListConverter converter;
 
-	public List<Score> readOraculumDataStore() {
-		return readDataStore("OraculumDataStore.csv");
+	public List<ColoredData> readOraculumDataStore() {
+		return converter.convertFromOraculumDataList(readDataStore("OraculumDataStore.csv"));
 	}
 
-	public List<Score> readSingleSourceOfTruthDataStore() {
-
-		return readDataStore("SingleSourceOfTruthDataStore.csv");
+	public List<ColoredData> readSingleSourceOfTruthDataStore() {
+		return converter.converFromDataList(readDataStore("SingleSourceOfTruthDataStore.csv"));
 	}
 
-	public List<Score> readThirdPartyDataStore() {
-
-		return readDataStore("ThirdPartyDataStore.csv");
+	public List<ColoredData> readThirdPartyDataStore() {
+		return converter.converFromDataList(readDataStore("ThirdPartyDataStore.csv"));
 	}
 
-	private List<Score> readDataStore(String fileName) {
+	private List<RawData> readDataStore(String fileName) {
 		try {
 			File file = new ClassPathResource(fileName).getFile();
-			MappingIterator<Score> mappingIterator = mapper.readerFor(Score.class).with(bootstrapSchema)
+			MappingIterator<RawData> mappingIterator = mapper.readerFor(RawData.class).with(bootstrapSchema)
 					.readValues(file);
 			return mappingIterator.readAll();
 
