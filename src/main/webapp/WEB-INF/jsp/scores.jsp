@@ -9,7 +9,7 @@
 	<table>
 		<c:forEach items="${coloredLabels}" var="line">
 			<tr>
-				<td><c:out value="${line.label}" /></td>
+				<td><c:out value="${line.color}" /></td>
 			</tr>
 		</c:forEach>
 	</table>

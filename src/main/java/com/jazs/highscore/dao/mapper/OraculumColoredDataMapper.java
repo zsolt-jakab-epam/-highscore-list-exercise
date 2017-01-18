@@ -1,6 +1,4 @@
-package com.jazs.highscore.dao;
-
-import java.util.function.Function;
+package com.jazs.highscore.dao.mapper;
 
 import org.springframework.stereotype.Component;
 
@@ -8,7 +6,7 @@ import com.jazs.highscore.domain.ColoredData;
 import com.jazs.highscore.domain.RawData;
 
 @Component
-public class OraculumRawDataToColoredDataMapper implements Function<RawData, ColoredData> {
+public class OraculumColoredDataMapper implements ColoredDataMapper {
 
 	@Override
 	public ColoredData apply(RawData rawData) {

@@ -2,11 +2,8 @@ package com.jazs.highscore.service;
 
 import java.util.Comparator;
 
-import org.springframework.stereotype.Component;
-
 import com.jazs.highscore.domain.ColoredData;
 
-@Component
 public class LabelComparator implements Comparator<ColoredData> {
 
 	@Override

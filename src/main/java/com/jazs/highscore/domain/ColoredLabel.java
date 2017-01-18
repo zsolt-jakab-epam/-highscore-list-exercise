@@ -23,4 +23,10 @@ public class ColoredLabel {
 	public String getColor() {
 		return color;
 	}
+
+
+	@Override
+	public String toString() {
+		return "ColoredLabel [label=" + label + ", color=" + color + "]";
+	}
 }

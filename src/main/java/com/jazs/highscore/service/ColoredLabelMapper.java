@@ -2,12 +2,9 @@ package com.jazs.highscore.service;
 
 import java.util.function.Function;
 
-import org.springframework.stereotype.Component;
-
 import com.jazs.highscore.domain.ColoredData;
 import com.jazs.highscore.domain.ColoredLabel;
 
-@Component
 public class ColoredLabelMapper implements Function<ColoredData, ColoredLabel> {
 
 	@Override

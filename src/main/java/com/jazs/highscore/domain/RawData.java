@@ -1,15 +1,16 @@
 package com.jazs.highscore.domain;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class RawData {
 	
 	private Integer id;
 	private String label;
 	private Float value;
 	
-	public RawData() {
-	}
-	
-	public RawData(Integer id, String label, Float value) {
+	@JsonCreator
+	public RawData(@JsonProperty("id") Integer id, @JsonProperty("label") String label, @JsonProperty("value") Float value) {
 		this.id = id;
 		this.label = label;
 		this.value = value;
@@ -31,7 +32,7 @@ public class RawData {
 		this.label = label;
 	}
 
-	public float getValue() {
+	public Float getValue() {
 		return value;
 	}
 
