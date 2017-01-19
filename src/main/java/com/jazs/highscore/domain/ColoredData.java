@@ -24,4 +24,10 @@ public class ColoredData {
 	public Integer getId() {
 		return id;
 	}
+
+	@Override
+	public String toString() {
+		return "ColoredData [label=" + label + ", color=" + color + ", id=" + id + "]";
+	}
+	
 }

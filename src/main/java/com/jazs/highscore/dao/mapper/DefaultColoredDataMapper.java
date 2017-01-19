@@ -1,8 +1,11 @@
 package com.jazs.highscore.dao.mapper;
 
+import org.springframework.stereotype.Component;
+
 import com.jazs.highscore.domain.ColoredData;
 import com.jazs.highscore.domain.RawData;
 
+@Component("defaultColoredDataMapper")
 public class DefaultColoredDataMapper implements ColoredDataMapper {
 
 	@Override

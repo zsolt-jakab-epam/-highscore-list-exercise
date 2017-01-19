@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import com.jazs.highscore.domain.ColoredData;
 import com.jazs.highscore.domain.RawData;
 
-@Component
+@Component("oraculumColoredDataMapper")
 public class OraculumColoredDataMapper implements ColoredDataMapper {
 
 	@Override
