@@ -2,7 +2,7 @@ package com.jazs.highscore.service;
 
 import java.util.Comparator;
 
-import com.jazs.highscore.domain.ColoredData;
+import com.jazs.highscore.dao.ColoredData;
 
 public class LabelComparator implements Comparator<ColoredData> {
 

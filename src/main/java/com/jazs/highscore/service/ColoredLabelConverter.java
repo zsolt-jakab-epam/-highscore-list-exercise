@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.jazs.highscore.domain.ColoredData;
-import com.jazs.highscore.domain.ColoredLabel;
+import com.jazs.highscore.dao.ColoredData;
+import com.jazs.highscore.dao.ColoredLabel;
 
 public class ColoredLabelConverter {
 

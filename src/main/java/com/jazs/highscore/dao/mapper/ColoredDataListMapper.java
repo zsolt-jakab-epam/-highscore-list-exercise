@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.jazs.highscore.domain.ColoredData;
-import com.jazs.highscore.domain.RawData;
+import com.jazs.highscore.dao.ColoredData;
+import com.jazs.highscore.dao.RawData;
 
 public class ColoredDataListMapper {
 	

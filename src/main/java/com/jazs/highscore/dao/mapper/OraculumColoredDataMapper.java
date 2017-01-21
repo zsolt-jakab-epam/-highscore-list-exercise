@@ -2,8 +2,8 @@ package com.jazs.highscore.dao.mapper;
 
 import org.springframework.stereotype.Component;
 
-import com.jazs.highscore.domain.ColoredData;
-import com.jazs.highscore.domain.RawData;
+import com.jazs.highscore.dao.ColoredData;
+import com.jazs.highscore.dao.RawData;
 
 @Component("oraculumColoredDataMapper")
 public class OraculumColoredDataMapper implements ColoredDataMapper {

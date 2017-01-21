@@ -2,8 +2,8 @@ package com.jazs.highscore.service;
 
 import java.util.function.Function;
 
-import com.jazs.highscore.domain.ColoredData;
-import com.jazs.highscore.domain.ColoredLabel;
+import com.jazs.highscore.dao.ColoredData;
+import com.jazs.highscore.dao.ColoredLabel;
 
 public class ColoredLabelMapper implements Function<ColoredData, ColoredLabel> {
 

@@ -1,4 +1,4 @@
-package com.jazs.highscore.domain;
+package com.jazs.highscore.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 

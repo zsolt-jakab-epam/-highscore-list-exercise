@@ -20,12 +20,13 @@ import org.springframework.context.annotation.Scope;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvParser;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
+import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
+import com.jazs.highscore.dao.ColoredData;
+import com.jazs.highscore.dao.ColoredLabel;
+import com.jazs.highscore.dao.RawData;
 import com.jazs.highscore.dao.mapper.ColoredDataListMapper;
 import com.jazs.highscore.dao.mapper.ColoredDataMapper;
 import com.jazs.highscore.dao.repository.CsvDataStoreRepository;
-import com.jazs.highscore.domain.ColoredData;
-import com.jazs.highscore.domain.ColoredLabel;
-import com.jazs.highscore.domain.RawData;
 import com.jazs.highscore.service.ColoredLabelConverter;
 import com.jazs.highscore.service.ColoredLabelMapper;
 import com.jazs.highscore.service.LabelComparator;
@@ -41,6 +42,7 @@ public class HighScoreConfiguration {
 	@Bean
 	public CsvMapper csvMapper() {
 		CsvMapper mapper = new CsvMapper();
+		mapper.registerModule(new ParameterNamesModule());
 		mapper.enable(CsvParser.Feature.WRAP_AS_ARRAY);
 		return mapper;
 	}
