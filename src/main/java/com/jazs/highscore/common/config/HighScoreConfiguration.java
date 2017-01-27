@@ -7,43 +7,31 @@ import static com.jazs.highscore.common.Constants.SINGLE_SOURCE_OF_TRUTH_DATA_ST
 import static com.jazs.highscore.common.Constants.THIRD_PARTY_DATA_STORE_CSV;
 import static com.jazs.highscore.common.Constants.VALUE;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvParser;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
-import com.jazs.highscore.dao.ColoredData;
-import com.jazs.highscore.dao.ColoredLabel;
-import com.jazs.highscore.dao.RawData;
-import com.jazs.highscore.dao.mapper.ColoredDataListMapper;
-import com.jazs.highscore.dao.mapper.ColoredDataMapper;
-import com.jazs.highscore.dao.repository.CsvDataStoreRepository;
-import com.jazs.highscore.service.ColoredLabelConverter;
-import com.jazs.highscore.service.ColoredLabelMapper;
-import com.jazs.highscore.service.LabelComparator;
+import com.jazs.highscore.dao.ColoredCsvData;
+import com.jazs.highscore.dao.DefaultColoredCsvData;
+import com.jazs.highscore.dao.RedColoredCsvData;
 
 @Configuration
 public class HighScoreConfiguration {
-
-
-
-	@Autowired
-	private ApplicationContext ctx;
 
 	@Bean
 	public CsvMapper csvMapper() {
 		CsvMapper mapper = new CsvMapper();
 		mapper.registerModule(new ParameterNamesModule());
 		mapper.enable(CsvParser.Feature.WRAP_AS_ARRAY);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		
 		return mapper;
 	}
 
@@ -52,81 +40,14 @@ public class HighScoreConfiguration {
 		return CsvSchema.builder().addColumn(ID, CsvSchema.ColumnType.NUMBER).addColumn(LABEL)
 				.addColumn(VALUE, CsvSchema.ColumnType.NUMBER).build();
 	}
-
-	@Bean
-	@Scope("prototype")
-	CsvDataStoreRepository repository(String fileName) {
-		return new CsvDataStoreRepository(csvMapper(), dataStoreCsvSchema(), fileName);
-	}
-
-	@Bean
-	@Scope("prototype")
-	List<RawData> csvRawDataList(String fileName) {
-		
-		CsvDataStoreRepository repository = repository(fileName);
-		
-		return repository.getAll();
-	}
 	
 	@Bean
-	@Scope("prototype")
-	ColoredDataListMapper coloredDataListMapper(String insideMapperName) {
+	Map<String, Class<? extends ColoredCsvData>> dataStoreMap() {
+		Map<String, Class<? extends ColoredCsvData>> map = new HashMap<>();
+		map.put(ORACULUM_DATA_STORE_CSV, RedColoredCsvData.class);
+		map.put(SINGLE_SOURCE_OF_TRUTH_DATA_STORE_CSV, DefaultColoredCsvData.class);
+		map.put(THIRD_PARTY_DATA_STORE_CSV, DefaultColoredCsvData.class);
 		
-		ColoredDataMapper mapper = ctx.getBean(insideMapperName, ColoredDataMapper.class);
-		
-		return new ColoredDataListMapper(mapper);
-	}
-
-	@Bean
-	@Scope("prototype")
-	List<ColoredData> oraculumColoredDataList(String fileName) {
-		
-		List<RawData> list = csvRawDataList(ORACULUM_DATA_STORE_CSV);
-		
-		ColoredDataListMapper mapper = coloredDataListMapper("oraculumColoredDataMapper");
-		
-		return mapper.map(list);
-	}
-
-	@Bean
-	LabelComparator labelComparator() {
-		return new LabelComparator();
-	}
-
-	@Bean
-	ColoredLabelMapper coloredLabelMapper() {
-		return new ColoredLabelMapper();
-	}
-
-	@Bean
-	ColoredLabelConverter coloredLabelConverter(ColoredLabelMapper coloredLabelMapper) {
-		return new ColoredLabelConverter(coloredLabelMapper);
-	}
-
-	@Bean
-	List<ColoredData> coloredDataList() {
-		
-		List<RawData> oraculumRawDataList = csvRawDataList(ORACULUM_DATA_STORE_CSV);
-		List<RawData> singleSourceOfTruthRawDataList = csvRawDataList(SINGLE_SOURCE_OF_TRUTH_DATA_STORE_CSV);
-		List<RawData> thirdPartyRawDataList = csvRawDataList(THIRD_PARTY_DATA_STORE_CSV);
-		
-		ColoredDataListMapper oraculumColoredDataListMapper = coloredDataListMapper("oraculumColoredDataMapper");
-		ColoredDataListMapper defaultColoredDataListMapper = coloredDataListMapper("defaultColoredDataMapper");
-		
-		List<ColoredData> coloredDataList = oraculumColoredDataListMapper.map(oraculumRawDataList);
-		coloredDataList.addAll(defaultColoredDataListMapper.map(singleSourceOfTruthRawDataList));
-		coloredDataList.addAll(defaultColoredDataListMapper.map(thirdPartyRawDataList));
-
-		return coloredDataList;
-	}
-
-	@Bean
-	public List<ColoredLabel> coloredLabels(List<ColoredData> coloredDataList,
-			ColoredLabelConverter coloredLabelConverter) {
-
-		List<ColoredData> sortedColoredDataList = coloredDataList.stream().sorted(labelComparator())
-				.collect(Collectors.toCollection(ArrayList::new));
-
-		return coloredLabelConverter.converFromDataList(sortedColoredDataList);
+		return map;
 	}
 }

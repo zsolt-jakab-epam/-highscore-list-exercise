@@ -1,24 +1,26 @@
-package com.jazs.highscore.service;
+package com.jazs.highscore.dao.mapper;
 
 import static com.jazs.highscore.common.util.ImmutableListCollector.toImmutableList;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import com.jazs.highscore.dao.ColoredData;
+import com.jazs.highscore.dao.ColoredCsvData;
 import com.jazs.highscore.dao.ColoredLabel;
 
-public class ColoredLabelConverter {
+@Component
+public class ColoredLabelsMapper {
 
 	private final ColoredLabelMapper mapper;
 
 	@Autowired
-	public ColoredLabelConverter(ColoredLabelMapper mapper) {
+	public ColoredLabelsMapper(ColoredLabelMapper mapper) {
 		this.mapper = mapper;
 	}
 
-	public List<ColoredLabel> converFromDataList(List<ColoredData> rawDataList) {
+	public List<ColoredLabel> map(List<ColoredCsvData> rawDataList) {
 		return rawDataList.stream().map(mapper).collect(toImmutableList());
 	}
 }

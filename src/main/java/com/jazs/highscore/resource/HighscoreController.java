@@ -8,20 +8,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jazs.highscore.dao.ColoredLabel;
+import com.jazs.highscore.service.HighscoreService;
 
 @Controller
 public class HighscoreController {
 
 	@Autowired
-	List<ColoredLabel> coloredLabels;
+	HighscoreService highscoreService;
 	
     @RequestMapping("/")
     public String list(Map<String, List<ColoredLabel>> model) {
-    	for (ColoredLabel rawData : coloredLabels) {
+    	for (ColoredLabel rawData : highscoreService.getAll()) {
 			System.out.println(rawData);
 		}
-    	System.out.println(coloredLabels);
-		model.put("coloredLabels", coloredLabels);
+    	System.out.println(highscoreService.getAll().hashCode());
+		model.put("coloredLabels", highscoreService.getAll());
 		
 		return "scores";
     }
