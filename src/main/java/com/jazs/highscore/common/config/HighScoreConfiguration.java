@@ -18,9 +18,9 @@ import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvParser;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
-import com.jazs.highscore.dao.ColoredCsvData;
-import com.jazs.highscore.dao.DefaultColoredCsvData;
-import com.jazs.highscore.dao.RedColoredCsvData;
+import com.jazs.highscore.dao.model.ColoredCsvData;
+import com.jazs.highscore.dao.model.DefaultColoredCsvData;
+import com.jazs.highscore.dao.model.RedColoredCsvData;
 
 @Configuration
 public class HighScoreConfiguration {

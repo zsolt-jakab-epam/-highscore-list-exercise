@@ -7,8 +7,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.jazs.highscore.dao.ColoredCsvData;
-import com.jazs.highscore.dao.ColoredLabel;
+import com.jazs.highscore.dao.model.ColoredCsvData;
+import com.jazs.highscore.dao.model.ColoredLabel;
 
 @Component
 public class ColoredLabelsMapper {

@@ -4,7 +4,7 @@ import java.util.Comparator;
 
 import org.springframework.stereotype.Component;
 
-import com.jazs.highscore.dao.ColoredCsvData;
+import com.jazs.highscore.dao.model.ColoredCsvData;
 
 @Component
 public class ColoredCsvDataByLabelAndIdComparator implements Comparator<ColoredCsvData> {

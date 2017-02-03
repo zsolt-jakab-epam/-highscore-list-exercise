@@ -1,4 +1,4 @@
-package com.jazs.highscore.dao;
+package com.jazs.highscore.dao.model;
 
 public interface ColoredCsvData {
 

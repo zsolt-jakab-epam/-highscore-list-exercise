@@ -1,4 +1,4 @@
-package com.jazs.highscore.dao;
+package com.jazs.highscore.dao.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 

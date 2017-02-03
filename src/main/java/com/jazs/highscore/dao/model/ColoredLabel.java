@@ -1,4 +1,4 @@
-package com.jazs.highscore.dao;
+package com.jazs.highscore.dao.model;
 
 import org.springframework.beans.factory.annotation.Autowired;
 

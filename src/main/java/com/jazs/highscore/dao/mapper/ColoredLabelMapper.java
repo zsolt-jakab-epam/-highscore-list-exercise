@@ -4,8 +4,8 @@ import java.util.function.Function;
 
 import org.springframework.stereotype.Component;
 
-import com.jazs.highscore.dao.ColoredCsvData;
-import com.jazs.highscore.dao.ColoredLabel;
+import com.jazs.highscore.dao.model.ColoredCsvData;
+import com.jazs.highscore.dao.model.ColoredLabel;
 
 @Component
 public class ColoredLabelMapper implements Function<ColoredCsvData, ColoredLabel> {
