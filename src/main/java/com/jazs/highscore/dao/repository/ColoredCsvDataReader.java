@@ -37,10 +37,14 @@ public class ColoredCsvDataReader {
 		try {
 			File file = new ClassPathResource(filePath).getFile();
 			MappingIterator<T> mappingIterator = csvMapper.readerFor(clazz).with(csvSchema).readValues(file);
+			
 			LOGGER.info("Read csv data store: {}", filePath);
+			
 			return (List<ColoredCsvData>) mappingIterator.readAll();
+			
 		} catch (IOException e) {
-			LOGGER.error("Error reading from file: {} {} ", filePath, e);
+			LOGGER.error("Error reading from file: {} ", filePath, e);
+			
 			return Collections.emptyList();
 		}
 	}

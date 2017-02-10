@@ -5,11 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class ColoredLabel {
 	
 	private final String label;
-	private final String color;
+	
+	private final Color color;
 	
 
 	@Autowired
-	public ColoredLabel(String label, String color) {
+	public ColoredLabel(String label, Color color) {
 		this.label = label;
 		this.color = color;
 	}
@@ -20,7 +21,7 @@ public class ColoredLabel {
 	}
 
 
-	public String getColor() {
+	public Color getColor() {
 		return color;
 	}
 

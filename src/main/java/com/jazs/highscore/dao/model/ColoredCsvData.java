@@ -6,5 +6,5 @@ public interface ColoredCsvData {
 
 	String getLabel();
 
-	String getColor();
+	Color getColor();
 }

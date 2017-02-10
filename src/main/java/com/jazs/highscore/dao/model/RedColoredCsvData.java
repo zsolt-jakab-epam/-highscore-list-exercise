@@ -5,14 +5,16 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 public class RedColoredCsvData implements ColoredCsvData {
 
 	private Integer id;
+	
 	private String label;
-	private String color;
+	
+	private Color color;
 
 	@JsonCreator
 	public RedColoredCsvData(Integer id, String label) {
 		this.id = id;
 		this.label = label;
-		this.color = "red";
+		this.color = Color.RED;
 	}
 
 	@Override
@@ -26,7 +28,7 @@ public class RedColoredCsvData implements ColoredCsvData {
 	}
 
 	@Override
-	public String getColor() {
+	public Color getColor() {
 		return color;
 	}
 

@@ -1,18 +1,23 @@
 package com.jazs.highscore.dao.model;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 public class DefaultColoredCsvData implements ColoredCsvData {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(DefaultColoredCsvData.class);
+
 	private static final double GREEN_LOWER_LIMIT = 100.0;
-	
+
 	private static final double GREEN_UPPER_LIMIT = 200.0;
-	
+
 	private Integer id;
-	
+
 	private String label;
-	
-	private String color;
+
+	private Color color;
 
 	@JsonCreator
 	public DefaultColoredCsvData(Integer id, String label, Double value) {
@@ -20,11 +25,11 @@ public class DefaultColoredCsvData implements ColoredCsvData {
 		this.label = label;
 
 		if (value != null && value < GREEN_LOWER_LIMIT) {
-			this.color = "blue";
+			this.color = Color.BLUE;
 		} else if (value != null && GREEN_LOWER_LIMIT <= value && value <= GREEN_UPPER_LIMIT) {
-			this.color = "green";
+			this.color = Color.GREEN;
 		} else {
-			this.color = "black";
+			this.color = Color.DEFAULT;
 		}
 	}
 
@@ -39,7 +44,7 @@ public class DefaultColoredCsvData implements ColoredCsvData {
 	}
 
 	@Override
-	public String getColor() {
+	public Color getColor() {
 		return color;
 	}
 
@@ -47,4 +52,5 @@ public class DefaultColoredCsvData implements ColoredCsvData {
 	public String toString() {
 		return "DefaultColoredCsvData [id=" + id + ", label=" + label + ", color=" + color + "]";
 	}
+
 }

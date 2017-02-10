@@ -45,6 +45,7 @@ public class CsvDataStoreRepository {
 
 		for (Entry<String, Class<? extends ColoredCsvData>> entry : csvNameAndTypeMap.entrySet()) {
 			List<ColoredCsvData> entryList = csvReader.read(getFilePath(entry), entry.getValue());
+			System.out.println(entryList);
 			allColoredCsvData.addAll(entryList);
 		}
 
